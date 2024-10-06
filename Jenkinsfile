@@ -1,26 +1,17 @@
 pipeline {
     agent any
 
-    environment {
-        BUILD_AUTOMATION_TOOL = "Maven"
-        UNIT_TEST_TOOL = "JUnit"
-        INTEGRATION_TEST_TOOL = "Protractor"
-        ANALYSE_TOOL = "FindBug"
-        SECURITY_SCAN = "Checkmarx"
-        SERVER = "AWS EC2 instance"
-    }
-
     stages {
         stage('Build') {
             steps {
-                echo "Building the code using ${env.BUILD_AUTOMATION_TOOL} to compile and package."
+                echo "Building the code using Maven to compile and package."
             }
         }
 
         stage('Unit and Integration Tests') {
             steps {
-                echo "Running unit tests with ${env.UNIT_TEST_TOOL} to ensure code functionality."
-                echo "Running integration tests with ${env.INTEGRATION_TEST_TOOL} to validate system components."
+                echo "Running unit tests with JUnit to ensure code functionality."
+                echo "Running integration tests with Protractor to validate system components."
             }
             post {
                 success {
@@ -34,13 +25,13 @@ pipeline {
 
         stage('Code Check') {
             steps {
-                echo "Analyzing code with ${env.ANALYSE_TOOL} to ensure industry standards."
+                echo "Analyzing code with FindBug to ensure industry standards."
             }
         }
 
         stage('Security Scan') {
             steps {
-                echo "Performing security scan with ${env.SECURITY_SCAN} to identify vulnerabilities."
+                echo "Performing security scan with Checkmarx to identify vulnerabilities."
             }
             post {
                 success {
@@ -54,7 +45,7 @@ pipeline {
 
         stage('Deploy to Staging') {
             steps {
-                echo "Deploying the application to ${env.SERVER} for staging."
+                echo "Deploying the application to AWS EC2 instance for staging."
                 sleep 10
             }
         }
@@ -75,7 +66,7 @@ pipeline {
 
         stage('Deploy to Production') {
             steps {
-                echo "Deploying the application to ${env.SERVER} for production."
+                echo "Deploying the application to AWS EC2 instance for production."
             }
         }
     }
